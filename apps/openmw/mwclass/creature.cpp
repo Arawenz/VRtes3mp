@@ -247,7 +247,7 @@ namespace MWClass
         */
         if (mwmp::PlayerList::isDedicatedPlayer(ptr) || mwmp::Main::get().getCellController()->isDedicatedActor(ptr))
         {
-            return;
+            return false;
         }
         /*
             End of tes3mp addition

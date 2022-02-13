@@ -558,7 +558,7 @@ namespace MWClass
         */
         if (mwmp::PlayerList::isDedicatedPlayer(ptr) || mwmp::Main::get().getCellController()->isDedicatedActor(ptr))
         {
-            return;
+            return false;
         }
         /*
             End of tes3mp addition
@@ -1019,8 +1019,9 @@ namespace MWClass
             {
                 float hapticIntensity = std::max(0.25f, std::min(1.f, hitStrength));
                 inputManager->applyHapticsRightHand(hapticIntensity);
+            }
         }
-
+ 
         /*
             Start of tes3mp addition
 
@@ -1075,7 +1076,6 @@ namespace MWClass
             End of tes3mp addition
         */
     }
-
     std::shared_ptr<MWWorld::Action> Npc::activate (const MWWorld::Ptr& ptr,
         const MWWorld::Ptr& actor) const
     {
