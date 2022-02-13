@@ -168,7 +168,7 @@ if(BUILD_OPENMW)
          vranimation vrcamera vrenvironment vrframebuffer vrgui vrinputmanager vrinput vrlistbox vrmetamenu vrpointer vrsession vrtracking vrtypes vrutil vrviewer vrvirtualkeyboard
         )
 
-    openmw_add_executable(openmw
+    openmw_add_executable(tes3mp
         ${OPENMW_FILES}
         ${OPENMW_VR_FILES}
         ${GAME} ${GAME_HEADER}
@@ -189,25 +189,25 @@ if(BUILD_OPENMW)
     )
     FetchContent_MakeAvailable(OpenXR)
 
-    target_link_libraries(openmw openxr_loader)
+    target_link_libraries(tes3mp openxr_loader)
 
     # Preprocessor variable used to control code paths to vr code
     if (WIN32)
-        target_compile_options(openmw PUBLIC -DUSE_OPENXR -DXR_USE_GRAPHICS_API_OPENGL -DXR_USE_GRAPHICS_API_D3D11 -DXR_USE_PLATFORM_WIN32)
+        target_compile_options(tes3mp PUBLIC -DUSE_OPENXR -DXR_USE_GRAPHICS_API_OPENGL -DXR_USE_GRAPHICS_API_D3D11 -DXR_USE_PLATFORM_WIN32)
     elseif(UNIX)
-        target_compile_options(openmw PUBLIC -DUSE_OPENXR -DXR_USE_GRAPHICS_API_OPENGL -DXR_USE_PLATFORM_XLIB)
+        target_compile_options(tes3mp PUBLIC -DUSE_OPENXR -DXR_USE_GRAPHICS_API_OPENGL -DXR_USE_PLATFORM_XLIB)
         find_package(X11 REQUIRED)
-        target_link_libraries(openmw ${X11_LIBRARIES})
+        target_link_libraries(tes3mp ${X11_LIBRARIES})
     endif()
-    target_link_libraries(openmw ${OPENMW_LINK_TARGETS})
+    target_link_libraries(tes3mp ${OPENMW_LINK_TARGETS})
     if(APPLE)
-        add_custom_command(TARGET openmw
+        add_custom_command(TARGET tes3mp
             POST_BUILD
             COMMAND cp "${OpenMW_BINARY_DIR}/resources/version" "${BUNDLE_RESOURCES_DIR}/resources")
     endif(APPLE)
 
     if (WIN32)
-        INSTALL(TARGETS openmw RUNTIME DESTINATION ".")
+        INSTALL(TARGETS tes3mp RUNTIME DESTINATION ".")
     endif (WIN32)
 endif()
 
@@ -246,11 +246,11 @@ target_link_libraries(tes3mp
 )
 
 if (USE_SYSTEM_TINYXML)
-    target_link_libraries(openmw ${TinyXML_LIBRARIES})
+    target_link_libraries(tes3mp ${TinyXML_LIBRARIES})
 endif()
 
 if (NOT UNIX)
-target_link_libraries(openmw ${SDL2MAIN_LIBRARY})
+target_link_libraries(tes3mp ${SDL2MAIN_LIBRARY})
 endif()
 
 if(OSG_STATIC)
