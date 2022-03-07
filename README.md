@@ -1,3 +1,7 @@
+This is an altered source that merges OPENMW-VR with TES3MP.
+the original TES3MP project can be found [here](https://github.com/TES3MP/TES3MP).
+the original OPENMW-VR project can be found [here](https://gitlab.com/madsbuvi/openmw).
+
 TES3MP
 ======
 
@@ -46,7 +50,6 @@ Getting started
 * [Subreddit](https://www.reddit.com/r/tes3mp)
 * [Known issues and bug reports](https://github.com/TES3MP/TES3MP/issues)
 
-[[_TOC_]]
 
 OpenMW
 ======
