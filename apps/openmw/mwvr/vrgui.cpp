@@ -283,7 +283,7 @@ namespace MWVR
 
         auto orientation = mRotation * mTrackedPose.orientation;
 
-        if(mLayerName == "StatusHUD" || mLayerName == "VirtualKeyboard")
+        if(mLayerName == "StatusHUD" || mLayerName == "VirtualKeyboard" || mLayerName == "Chat")
         {
             orientation = osg::Quat(osg::PI_2, osg::Vec3(0, 0, 1)) * orientation;
         }
@@ -554,6 +554,20 @@ namespace MWVR
             "/world/user/hand/left/input/aim/pose",
             ""
         };
+        LayerConfig chatConfig = LayerConfig{
+            0,
+            false,
+            osg::Vec4{},
+            leftHudOffset, // offset (meters)
+            osg::Vec2(0.f,0.9f), // center (model space)
+            osg::Vec2(.1f, .1f), // extent (meters)
+            1024, // Spatial resolution (pixels per meter)
+            osg::Vec2i(1024,1024), // Texture resolution
+            defaultConfig.myGUIViewSize,
+            SizingMode::Auto,
+            "/world/user/hand/left/input/aim/pose",
+            ""
+        };
         LayerConfig statusHUDConfig = LayerConfig
         {
             0,
@@ -607,6 +621,7 @@ namespace MWVR
             {"Menu", videoPlayerConfig},
             {"LoadingScreen", loadingScreenConfig},
             {"VirtualKeyboard", virtualKeyboardConfig},
+            {"Chat", chatConfig},
         };
     }
 
@@ -872,9 +887,11 @@ namespace MWVR
                 else
                     mLayerConfigs["StatusHUD"].offset = gLeftHudOffsetWrist;
                 mLayerConfigs["VirtualKeyboard"].offset = mLayerConfigs["StatusHUD"].offset + osg::Vec3(0,0.0001,0);
+                mLayerConfigs["Chat"].offset = mLayerConfigs["StatusHUD"].offset;
 
                 configUpdated("StatusHUD");
                 configUpdated("VirtualKeyboard");
+                configUpdated("Chat");
             }
         }
     }
